@@ -1,0 +1,167 @@
+
+Setting environment for using XAMPP for Windows.
+pirut@LAPTOP-IRCL4GRG c:\xampp
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.035 sec)
+
+
+
+MariaDB [(none)]> create database Day01
+    -> ;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.002 sec)
+
+MariaDB [(none)]> use Day01 database;
+Database changed
+
+
+MariaDB [Day01]> create table Students(std_id VARCHAR(25),Name VARCHAR(30),Course VARCHAR(20),DOB VARCHAR(15),City VARCH
+AR(20));
+Query OK, 0 rows affected (0.021 sec)
+
+
+
+MariaDB [Day01]> DESC Students;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| std_id | varchar(25) | YES  |     | NULL    |       |
+| Name   | varchar(30) | YES  |     | NULL    |       |
+| Course | varchar(20) | YES  |     | NULL    |       |
+| DOB    | varchar(15) | YES  |     | NULL    |       |
+| City   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.034 sec)
+
+MariaDB [Day01]> INSERT INTO students VALUES('2022/ASP/01','Kamala','AMC','11.02.2003','Jaffna');
+Query OK, 1 row affected (0.073 sec)
+
+MariaDB [Day01]> select * from Students;
++-------------+--------+--------+------------+--------+
+| std_id      | Name   | Course | DOB        | City   |
++-------------+--------+--------+------------+--------+
+| 2022/ASP/01 | Kamala | AMC    | 11.02.2003 | Jaffna |
++-------------+--------+--------+------------+--------+
+1 row in set (0.001 sec)
+
+
+MariaDB [Day01]> INSERT INTO Students VALUES('2022/ASP/05','Nimal','AMC','25.07.2003','Vavuniya');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [Day01]> INSERT INTO Students VALUES('2022/ASP/10','Kasuni','AMC','17.05.2003','Batticaloa');
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [Day01]> INSERT INTO Students VALUES('2022/ASP/17','Kannan','AMC','08.07.2003','Jaffna');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [Day01]> INSERT INTO Students VALUES('2022/ASP/20','Theeran','AMC','09.08.2003','Galle');
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [Day01]> create * from Students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from Students' at line 1
+MariaDB [Day01]> select * from Students;
++-------------+---------+--------+------------+------------+
+| std_id      | Name    | Course | DOB        | City       |
++-------------+---------+--------+------------+------------+
+| 2022/ASP/01 | Kamala  | AMC    | 11.02.2003 | Jaffna     |
+| 2022/ASP/05 | Nimal   | AMC    | 25.07.2003 | Vavuniya   |
+| 2022/ASP/10 | Kasuni  | AMC    | 17.05.2003 | Batticaloa |
+| 2022/ASP/17 | Kannan  | AMC    | 08.07.2003 | Jaffna     |
+| 2022/ASP/20 | Theeran | AMC    | 09.08.2003 | Galle      |
++-------------+---------+--------+------------+------------+
+5 rows in set (0.001 sec)
+
+
+
+
+MariaDB [Day01]> create table Employee_Details(PhysicianID VARCHAR(15),Name VARCHAR(30),Position VARCHAR(35));
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [Day01]> DESC Employee_Details;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| PhysicianID | varchar(15) | YES  |     | NULL    |       |
+| Name        | varchar(30) | YES  |     | NULL    |       |
+| Position    | varchar(35) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.033 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('1','John Dorian','Staff Internist');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('2','Elliot Raid','Attending Physician');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('3','Christopher Turk','Surgical Attending Physician');
+Query OK, 1 row affected (0.012 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('4','Percival Cox','Senior Attending Physician');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('5','Keith Dudemeister','MD Resident');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [Day01]> INSERT INTO Employee_Details VALUES('6','Molly clock','Attending Psychiatrist');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [Day01]> select * from Employee_Details;
++-------------+-------------------+------------------------------+
+| PhysicianID | Name              | Position                     |
++-------------+-------------------+------------------------------+
+| 1           | John Dorian       | Staff Internist              |
+| 2           | Elliot Raid       | Attending Physician          |
+| 3           | Christopher Turk  | Surgical Attending Physician |
+| 4           | Percival Cox      | Senior Attending Physician   |
+| 5           | Keith Dudemeister | MD Resident                  |
+| 6           | Molly clock       | Attending Psychiatrist       |
++-------------+-------------------+------------------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [Day01]>
+
+
+
+
+
+Conclusion:-   I studied, 
+                           1. how to show databases.
+						   2. how to create database day01.
+						   3. how to use database .
+						   4. creating the table .
+						   5. about the usage of DESC.
+						   6.about the usage of the "INSERT INTO Students VALUES".
+						   7.about the usage of "select * from students".
+                        
