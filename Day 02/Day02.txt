@@ -168,3 +168,9 @@ MariaDB [day2]> select * from students;
 6 rows in set (0.019 sec)
 
 MariaDB [day2]>
+
+
+Conclusion:
+      Learnt  how to create database and table.
+      Learnt how to drop/truncate the database and table.
+      Learnt how to create the table using pathlink.
