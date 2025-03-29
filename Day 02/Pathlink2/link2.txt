@@ -1,0 +1,5 @@
+LOAD DATA LOCAL INFILE'C:/Users/pirut/Desktop/Day 02/Path link/day2.csv'
+INTO TABLE students
+FIELDS TERMINATED BY'\,'
+LINES TERMINATED BY'\n'
+(ID,Name,Age,Grade,City);

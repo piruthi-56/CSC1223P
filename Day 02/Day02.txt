@@ -1,0 +1,170 @@
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.058 sec)
+
+MariaDB [(none)]> create database Day02;
+Query OK, 1 row affected (0.002 sec)
+
+
+MariaDB [(none)]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| day02              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use Day02;
+Database changed
+
+MariaDB [Day02]> create table patient(PatientId int primary key,Name VARCHAR(30),Address VARCHAR(30),Phone int(15));
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [Day02]> DESC patient;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| PatientId | int(11)     | NO   | PRI | NULL    |       |
+| Name      | varchar(30) | YES  |     | NULL    |       |
+| Address   | varchar(30) | YES  |     | NULL    |       |
+| Phone     | int(15)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.033 sec)
+
+
+MariaDB [Day02]> INSERT INTO patient VALUES
+    -> (100000001,'John Smith','42 foober lane','5550256'),
+    -> (100000002,'Grace Ritchie','37 sanfu drive','5550512'),
+    -> (100000003,'Todd Quinlan','101 omqbbq street','5551204'),
+    -> (100000004,'Dennis Doe','1100 foobaz avenue','5552048');
+Query OK, 4 rows affected (0.065 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [Day02]> select * from patient;
++-----------+---------------+--------------------+---------+
+| PatientId | Name          | Address            | Phone   |
++-----------+---------------+--------------------+---------+
+| 100000001 | John Smith    | 42 foober lane     | 5550256 |
+| 100000002 | Grace Ritchie | 37 sanfu drive     | 5550512 |
+| 100000003 | Todd Quinlan  | 101 omqbbq street  | 5551204 |
+| 100000004 | Dennis Doe    | 1100 foobaz avenue | 5552048 |
++-----------+---------------+--------------------+---------+
+4 rows in set (0.001 sec)
+
+
+MariaDB [Day02]> show tables;
++-----------------+
+| Tables_in_day02 |
++-----------------+
+| marks           |
+| patient         |
++-----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [Day02]> DROP table marks;
+Query OK, 0 rows affected (0.015 sec)
+
+
+MariaDB [Day02]> show tables;
++-----------------+
+| Tables_in_day02 |
++-----------------+
+| patient         |
++-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [Day02]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| day02              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.002 sec)
+
+
+MariaDB [Day02]> DROP database test;
+Query OK, 0 rows affected (0.035 sec)
+
+MariaDB [day02]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| day02              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+6 rows in set (0.002 sec)
+
+MariaDB [day02]> create table students(ID int primary key,Name VARCHAR(30),Age INT(2),Grade CHAR(1),City VARCHAR(20));
+Query OK, 0 rows affected (0.024 sec)
+
+
+MariaDB [day02]> DESC students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int(11)     | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | YES  |     | NULL    |       |
+| Age   | int(2)      | YES  |     | NULL    |       |
+| Grade | char(1)     | YES  |     | NULL    |       |
+| City  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.029 sec)
+
+
+MariaDB [day2]> LOAD DATA LOCAL INFILE'C:/Users/pirut/Desktop/Day 02/Path link/day2.csv'
+    -> INTO TABLE students
+    -> FIELDS TERMINATED BY'\,'
+    -> LINES TERMINATED BY'\n'
+    -> (ID,Name,Age,Grade,City);
+Query OK, 6 rows affected (0.029 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 0
+
+MariaDB [day2]> select * from students;
++----+---------+------+-------+-------------+
+| ID | Name    | Age  | Grade | City        |
++----+---------+------+-------+-------------+
+   | | Alice   |   20 | A     | New York
+    || Bob     |   22 | B     | Chicago
+   | | Charlie |   21 | A     | New York
+     | David   |   23 | C     | Boston
+    || Emma    |   22 | B     | Chicago
+|  6 | Frank   |   21 | A     | Los Angeles |
++----+---------+------+-------+-------------+
+6 rows in set (0.019 sec)
+
+MariaDB [day2]>
