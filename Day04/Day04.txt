@@ -1,0 +1,377 @@
+
+Setting environment for using XAMPP for Windows.
+pirut@LAPTOP-IRCL4GRG c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| day01              |
+| day02              |
+| day2               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| uov                |
++--------------------+
+8 rows in set (0.056 sec)
+
+MariaDB [(none)]> create database CSC1223;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use CSC1223;
+Database changed
+
+
+MariaDB [CSC1223]> create table employee(emp_id int PRIMARY KEY,name VARCHAR(30) NOT NULL,age int(2),department VARCHAR(30),salary double(10,2),city VARCHAR(20));
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [CSC1223]> DESc employee;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| emp_id     | int(11)      | NO   | PRI | NULL    |       |
+| name       | varchar(30)  | NO   |     | NULL    |       |
+| age        | int(2)       | YES  |     | NULL    |       |
+| department | varchar(30)  | YES  |     | NULL    |       |
+| salary     | double(10,2) | YES  |     | NULL    |       |
+| city       | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+6 rows in set (0.031 sec)
+
+MariaDB [CSC1223]> INSERT INTO employee VALUES
+    -> (101,'Alice',30,'HR',60000,'New York'),
+    ->  (102,'Bob',28,'IT',75000,'Los Angels'),
+    -> (103,'Charlie',35,'Finance',80000,'Chicago'),
+    ->  (104,'David',40,'IT',90000,'San Francisco'),
+    -> (105,'Emma',32,'Marketing',70000,'New York'),
+    -> (106,'Frank',27,'HR',50000,'Chicago');
+Query OK, 6 rows affected (0.011 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+MariaDB [CSC1223]> select * from employee;
++--------+---------+------+------------+----------+---------------+
+| emp_id | name    | age  | department | salary   | city          |
++--------+---------+------+------------+----------+---------------+
+|    101 | Alice   |   30 | HR         | 60000.00 | New York      |
+|    102 | Bob     |   28 | IT         | 75000.00 | Los Angels    |
+|    103 | Charlie |   35 | Finance    | 80000.00 | Chicago       |
+|    104 | David   |   40 | IT         | 90000.00 | San Francisco |
+|    105 | Emma    |   32 | Marketing  | 70000.00 | New York      |
+|    106 | Frank   |   27 | HR         | 50000.00 | Chicago       |
++--------+---------+------+------------+----------+---------------+
+6 rows in set (0.002 sec)
+
+MariaDB [CSC1223]> select name,salary from employee;
++---------+----------+
+| name    | salary   |
++---------+----------+
+| Alice   | 60000.00 |
+| Bob     | 75000.00 |
+| Charlie | 80000.00 |
+| David   | 90000.00 |
+| Emma    | 70000.00 |
+| Frank   | 50000.00 |
++---------+----------+
+6 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select DISTINCT department from employee;
++------------+
+| department |
++------------+
+| HR         |
+| IT         |
+| Finance    |
+| Marketing  |
++------------+
+4 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select name from employee WHERE department='IT';
++-------+
+| name  |
++-------+
+| Bob   |
+| David |
++-------+
+2 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select * from employee WHERE department='IT';
++--------+-------+------+------------+----------+---------------+
+| emp_id | name  | age  | department | salary   | city          |
++--------+-------+------+------------+----------+---------------+
+|    102 | Bob   |   28 | IT         | 75000.00 | Los Angels    |
+|    104 | David |   40 | IT         | 90000.00 | San Francisco |
++--------+-------+------+------------+----------+---------------+
+2 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select * from employee WHERE salary>70000.00;
++--------+---------+------+------------+----------+---------------+
+| emp_id | name    | age  | department | salary   | city          |
++--------+---------+------+------------+----------+---------------+
+|    102 | Bob     |   28 | IT         | 75000.00 | Los Angels    |
+|    103 | Charlie |   35 | Finance    | 80000.00 | Chicago       |
+|    104 | David   |   40 | IT         | 90000.00 | San Francisco |
++--------+---------+------+------------+----------+---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select * from employee WHERE age BETWEEN 30 AND 40;
++--------+---------+------+------------+----------+---------------+
+| emp_id | name    | age  | department | salary   | city          |
++--------+---------+------+------------+----------+---------------+
+|    101 | Alice   |   30 | HR         | 60000.00 | New York      |
+|    103 | Charlie |   35 | Finance    | 80000.00 | Chicago       |
+|    104 | David   |   40 | IT         | 90000.00 | San Francisco |
+|    105 | Emma    |   32 | Marketing  | 70000.00 | New York      |
++--------+---------+------+------------+----------+---------------+
+4 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select * from employee WHERE city IN('New York','Chicago'
+);
++--------+---------+------+------------+----------+----------+
+| emp_id | name    | age  | department | salary   | city     |
++--------+---------+------+------------+----------+----------+
+|    101 | Alice   |   30 | HR         | 60000.00 | New York |
+|    103 | Charlie |   35 | Finance    | 80000.00 | Chicago  |
+|    105 | Emma    |   32 | Marketing  | 70000.00 | New York |
+|    106 | Frank   |   27 | HR         | 50000.00 | Chicago  |
++--------+---------+------+------------+----------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> create table Product_Relation(ProductionID int PRIMARY KE
+Y,Name VARCHAR(30),Category VARCHAR(30),Price int,StockQuantity int);
+Query OK, 0 rows affected (0.023 sec)
+
+MariaDB [CSC1223]> DESC Product_Relation;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| ProductionID  | int(11)     | NO   | PRI | NULL    |       |
+| Name          | varchar(30) | YES  |     | NULL    |       |
+| Category      | varchar(30) | YES  |     | NULL    |       |
+| Price         | int(11)     | YES  |     | NULL    |       |
+| StockQuantity | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.033 sec)
+
+MariaDB [CSC1223]> INSERT INTO Product_Relation VALUES
+    -> (1,'Ultra HD Television','Electronics',1200,30),
+    -> (2,'Running Shoes','Footwear',100,50),
+    -> (3,'Electric Kettle','Appliances',45,25),
+    -> (4,'Denim Jeans','Clothing',60,40),
+    -> (5,'Bluetooth Headphones','Electronics',150,15);
+Query OK, 5 rows affected (0.012 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+
+MariaDB [CSC1223]> select * from Product_Relation;
++--------------+----------------------+-------------+-------+---------------+
+| ProductionID | Name                 | Category    | Price | StockQuantity |
++--------------+----------------------+-------------+-------+---------------+
+|            1 | Ultra HD Television  | Electronics |  1200 |            30 |
+|            2 | Running Shoes        | Footwear    |   100 |            50 |
+|            3 | Electric Kettle      | Appliances  |    45 |            25 |
+|            4 | Denim Jeans          | Clothing    |    60 |            40 |
+|            5 | Bluetooth Headphones | Electronics |   150 |            15 |
++--------------+----------------------+-------------+-------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> create table customer(CustomerID int PRIMARY KEY,Fullname
+ VARCHAR(40),RegistrationDate date,PhoneNumber VARCHAR(40));
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [CSC1223]> DESC customer;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| CustomerID       | int(11)     | NO   | PRI | NULL    |       |
+| Fullname         | varchar(40) | YES  |     | NULL    |       |
+| RegistrationDate | date        | YES  |     | NULL    |       |
+| PhoneNumber      | varchar(40) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.034 sec)
+
+MariaDB [CSC1223]> INSERT INTO customer VALUES
+    -> (1,'Alice Johnson','2021-03-15','+1234567890'),
+    -> (2,'Bob Smith','2021-05-20','+2345651125'),
+    -> (3,'Carol Brown','2021-01-03','+9432457899'),
+    -> (4,'Dave Wilson','2020-11-02','+5672340987'),
+    -> (5,'Eve Davis','2022-07-26','+4578992234');
+Query OK, 5 rows affected (0.011 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [CSC1223]> select * from customer;
++------------+---------------+------------------+-------------+
+| CustomerID | Fullname      | RegistrationDate | PhoneNumber |
++------------+---------------+------------------+-------------+
+|          1 | Alice Johnson | 2021-03-15       | +1234567890 |
+|          2 | Bob Smith     | 2021-05-20       | +2345651125 |
+|          3 | Carol Brown   | 2021-01-03       | +9432457899 |
+|          4 | Dave Wilson   | 2020-11-02       | +5672340987 |
+|          5 | Eve Davis     | 2022-07-26       | +4578992234 |
++------------+---------------+------------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> create table sales(SalesID int PRIMARY KEY,ProductID int,
+CustomerID int,SaleDate date,QuantitySold int);
+Query OK, 0 rows affected (0.021 sec)
+
+MariaDB [CSC1223]> DESC sales;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| SalesID      | int(11) | NO   | PRI | NULL    |       |
+| ProductID    | int(11) | YES  |     | NULL    |       |
+| CustomerID   | int(11) | YES  |     | NULL    |       |
+| SaleDate     | date    | YES  |     | NULL    |       |
+| QuantitySold | int(11) | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.033 sec)
+
+MariaDB [CSC1223]> INSERT INTO sales VALUES
+    -> (1,1,1,'2023-06-15',1),
+    -> (2,2,2,'2023-06-18',2),
+    -> (3,3,3,'2023-06-20',1),
+    -> (4,4,4,'2023-06-25',3),
+    -> (5,5,5,'2023-06-30',2);
+Query OK, 5 rows affected (0.011 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [CSC1223]> select * from sales;
++---------+-----------+------------+------------+--------------+
+| SalesID | ProductID | CustomerID | SaleDate   | QuantitySold |
++---------+-----------+------------+------------+--------------+
+|       1 |         1 |          1 | 2023-06-15 |            1 |
+|       2 |         2 |          2 | 2023-06-18 |            2 |
+|       3 |         3 |          3 | 2023-06-20 |            1 |
+|       4 |         4 |          4 | 2023-06-25 |            3 |
+|       5 |         5 |          5 | 2023-06-30 |            2 |
++---------+-----------+------------+------------+--------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select name from Product_Relation;
++----------------------+
+| name                 |
++----------------------+
+| Ultra HD Television  |
+| Running Shoes        |
+| Electric Kettle      |
+| Denim Jeans          |
+| Bluetooth Headphones |
++----------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select CustomerID,RegistrationDate from customer;
++------------+------------------+
+| CustomerID | RegistrationDate |
++------------+------------------+
+|          1 | 2021-03-15       |
+|          2 | 2021-05-20       |
+|          3 | 2021-01-03       |
+|          4 | 2020-11-02       |
+|          5 | 2022-07-26       |
++------------+------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select SalesID,SaleDate from sales WHERE QuantitySold=2;
++---------+------------+
+| SalesID | SaleDate   |
++---------+------------+
+|       2 | 2023-06-18 |
+|       5 | 2023-06-30 |
++---------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select Name from Product_Relation WHERE price>100;
++----------------------+
+| Name                 |
++----------------------+
+| Ultra HD Television  |
+| Bluetooth Headphones |
++----------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> select CustomerID from customer
+    -> WHERE RegistrationDate<'2021-01-01';
++------------+
+| CustomerID |
++------------+
+|          4 |
++------------+
+1 row in set (0.001 sec)
+
+
+
+MariaDB [CSC1223]> select CustomerID from customer
+    -> WHERE  YEAR(RegistrationDate)<2021;
++------------+
+| CustomerID |
++------------+
+|          4 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [CSC1223]> select DISTINCT Category from Product_Relation;
++-------------+
+| Category    |
++-------------+
+| Electronics |
+| Footwear    |
+| Appliances  |
+| Clothing    |
++-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> UPDATE Product_Relation SET price=145
+    -> WHERE price=45;
+Query OK, 1 row affected (0.011 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [CSC1223]> select * from Product_Relation;
++--------------+----------------------+-------------+-------+---------------+
+| ProductionID | Name                 | Category    | Price | StockQuantity |
++--------------+----------------------+-------------+-------+---------------+
+|            1 | Ultra HD Television  | Electronics |  1200 |            30 |
+|            2 | Running Shoes        | Footwear    |   100 |            50 |
+|            3 | Electric Kettle      | Appliances  |   145 |            25 |
+|            4 | Denim Jeans          | Clothing    |    60 |            40 |
+|            5 | Bluetooth Headphones | Electronics |   150 |            15 |
++--------------+----------------------+-------------+-------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [CSC1223]> DELETE from customer
+    -> WHERE customerID=3;
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [CSC1223]> select * from customer;
++------------+---------------+------------------+-------------+
+| CustomerID | Fullname      | RegistrationDate | PhoneNumber |
++------------+---------------+------------------+-------------+
+|          1 | Alice Johnson | 2021-03-15       | +1234567890 |
+|          2 | Bob Smith     | 2021-05-20       | +2345651125 |
+|          4 | Dave Wilson   | 2020-11-02       | +5672340987 |
+|          5 | Eve Davis     | 2022-07-26       | +4578992234 |
++------------+---------------+------------------+-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [CSC1223]>
+
+
+
+Conclusion:
+            Learnt how to create multiple tables.
+			Learnt to use =,<,>,!= symbols.
+			Learnt to change the particular details.
+			Learnt to delete the particular details.
+			Learnt to get the distinct information of the table. 
